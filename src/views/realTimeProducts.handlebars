@@ -1,0 +1,33 @@
+<div style="display:flex; gap: 5rem;">
+  <div>
+
+    <h1 id="ola">Productos agregados</h1>
+    <div id="container">
+
+    </div>
+  </div>
+
+  <div>
+    <h1>agregar Producto</h1>
+    <form action="post" id="form">
+      <p>title</p>
+      <input type="text" name="title" required/>
+      <p>description</p>
+      <input type="text" name="description" required/>
+      <p>code</p>
+      <input type="text" name="code" required />
+      <p>price</p>
+      <input type="text" name="price" required/>
+      <p>status</p>
+      <input type="text" name="status" required/>
+      <p>stock</p>
+      <input type="text" name="stock" required/>
+      <p>category</p>
+      <input type="text" name="category" required/>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
