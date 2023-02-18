@@ -5,10 +5,12 @@ import {
     Server
 } from 'socket.io'
 import productsRouter from './routes/products.router.js'
+import ProductManager from './manager/ProductManager.js'
 import cartsRouter from './routes/carts.router.js'
 import viewsRouter from './routes/views.router.js'
 import fs from 'fs'
 
+const productManager = new ProductManager();
 
 const app = express()
 app.use(express.static(`${__dirname}/public`))
@@ -34,7 +36,7 @@ io.on('connection', async socket => {
     const data = await fs.promises.readFile('./src/files/Products.json', 'utf-8')
     const products = JSON.parse(data)
     
-    io.emit('showFirstProducts', products)
+    io.emit('showProducts', products)
 
 
     socket.on('getForm', async data => {
@@ -58,15 +60,15 @@ io.on('connection', async socket => {
         products.push(data)
         await fs.promises.writeFile('./src/files/Products.json', JSON.stringify(products, null, '\t'))
 
-        io.emit('products', products)
+        io.emit('showProducts', products)
 
 
     })
     
     socket.on('spliced', async data => {
-        console.log(data)
-        await fs.promises.writeFile('./src/files/Products.json', JSON.stringify(data, null, '\t'))
-        io.emit('productsSpliced', data)
+        await productManager.deleteProduct(Number(data))
+        const products = await productManager.getProducts();
+        io.emit('showProducts', products);
     })
 
 

@@ -1,9 +1,10 @@
 import fs from 'fs'
+import __dirname from '../utils.js';
 
 export default class ProductManager {
         constructor() {
             this.products = [];
-            this.path = './files/Productos.json'
+            this.path = `${__dirname}/files/Products.json`;
         }
     
         //funcion para agregar el producto
@@ -107,20 +108,17 @@ export default class ProductManager {
         }
     
         deleteProduct = async (idProduct) => {
+            const objs = await this.getProducts()
+            const index = objs.findIndex(o => o.id == idProduct)
+            if (index == -1) {
+                throw new Error(`Error al borrar: no se encontró el id ${idProduct}`)
+            }
+
+            objs.splice(index, 1)
             try {
-                let data = await fs.promises.readFile(this.path, 'utf-8')
-                let products = JSON.parse(data)
-                let findId = products.find(e => e.id === idProduct)
-    
-                if (findId) {
-                    const filter = products.filter(e => e.id !== idProduct)
-                    this.products = filter
-                    return filter
-                } else {
-                    console.error('El id seleccionado no tiene ningun producto asociado')
-                }
+                await fs.promises.writeFile(this.path, JSON.stringify(objs, null, 2))
             } catch (error) {
-                console.log(error)
+                throw new Error(`Error al borrar: ${error}`)
             }
         }
     }
