@@ -38,6 +38,11 @@ io.on('connection', async socket => {
     
     io.emit('showProducts', products)
 
+    socket.on('spliced', async data => {
+        await productManager.deleteProduct(Number(data))
+        const products = await productManager.getProducts();
+        io.emit('showProducts', products);
+    })
 
     socket.on('getForm', async data => {
 
@@ -65,11 +70,6 @@ io.on('connection', async socket => {
 
     })
     
-    socket.on('spliced', async data => {
-        await productManager.deleteProduct(Number(data))
-        const products = await productManager.getProducts();
-        io.emit('showProducts', products);
-    })
 
 
 io.emit('prods', products)

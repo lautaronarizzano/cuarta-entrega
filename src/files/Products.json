@@ -1,1 +1,42 @@
-[]
+[
+	{
+		"title": "agua",
+		"description": "descripcion",
+		"code": "1",
+		"price": "120",
+		"status": "true",
+		"stock": "120",
+		"category": "bebida",
+		"id": 1
+	},
+	{
+		"title": "jugo",
+		"description": "descripcion",
+		"code": "2",
+		"price": "157",
+		"status": "true",
+		"stock": "120",
+		"category": "bebida",
+		"id": 2
+	},
+	{
+		"title": "hamburguesa",
+		"description": "descripcion",
+		"code": "3",
+		"price": "157",
+		"status": "true",
+		"stock": "120",
+		"category": "comida",
+		"id": 3
+	},
+	{
+		"title": "ensalada",
+		"description": "descripcion",
+		"code": "4",
+		"price": "157",
+		"status": "true",
+		"stock": "120",
+		"category": "comida",
+		"id": 4
+	}
+]

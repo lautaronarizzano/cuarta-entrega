@@ -28,9 +28,7 @@ socket.on('showProducts', data => {
     const deleted = document.querySelectorAll('.deleted')
     deleted.forEach(btn => {
         btn.addEventListener('click', async () => {
-            console.log('o')
             const id = btn.dataset.id;
-            console.log(id);
             socket.emit('spliced', id)
         });
     })
